@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CreateUserRequest {
 
-	@JsonProperty
+	@JsonProperty // tells Jackson to include this fields
 	private String username;
 
 	public String getUsername() {

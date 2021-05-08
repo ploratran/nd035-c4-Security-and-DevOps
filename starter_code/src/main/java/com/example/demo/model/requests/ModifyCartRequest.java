@@ -4,13 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ModifyCartRequest {
 	
-	@JsonProperty
+	@JsonProperty // tells Jackson to include this fields
 	private String username;
 	
-	@JsonProperty
+	@JsonProperty // tells Jackson to include this fields
 	private long itemId;
 	
-	@JsonProperty
+	@JsonProperty // tells Jackson to include this fields
 	private int quantity;
 
 	public String getUsername() {

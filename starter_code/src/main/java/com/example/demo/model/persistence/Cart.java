@@ -24,21 +24,21 @@ public class Cart {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonProperty
+	@JsonProperty // tells Jackson to include this fields
 	@Column
 	private Long id;
 	
 	@ManyToMany
-	@JsonProperty
+	@JsonProperty // tells Jackson to include this fields
 	@Column
     private List<Item> items;
 	
 	@OneToOne(mappedBy = "cart")
-	@JsonProperty
+	@JsonProperty // tells Jackson to include this fields
     private User user;
 	
 	@Column
-	@JsonProperty
+	@JsonProperty // tells Jackson to include this fields
 	private BigDecimal total;
 	
 	public BigDecimal getTotal() {

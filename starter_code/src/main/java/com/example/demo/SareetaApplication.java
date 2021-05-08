@@ -5,8 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@EnableJpaRepositories("com.example.demo.model.persistence.repositories")
-@EntityScan("com.example.demo.model.persistence")
+@EnableJpaRepositories("com.example.demo.model.persistence.repositories") // tells Spring this package contains data repositories
+@EntityScan("com.example.demo.model.persistence") // tells Spring this package contains data models
 @SpringBootApplication
 public class SareetaApplication {
 

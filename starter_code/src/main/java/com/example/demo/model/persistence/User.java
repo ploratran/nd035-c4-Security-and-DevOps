@@ -20,16 +20,16 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonProperty
+	@JsonProperty // tells Jackson to include this fields
 	private long id;
 	
 	@Column(nullable = false, unique = true)
-	@JsonProperty
+	@JsonProperty // tells Jackson to include this fields
 	private String username;
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id", referencedColumnName = "id")
-	@JsonIgnore
+	@JsonIgnore // tells Jackson to ignore this fields
     private Cart cart;
 	
 	public Cart getCart() {
