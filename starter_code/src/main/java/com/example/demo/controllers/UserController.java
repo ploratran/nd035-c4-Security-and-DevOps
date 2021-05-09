@@ -1,7 +1,5 @@
 package com.example.demo.controllers;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -62,7 +60,8 @@ public class UserController {
 		// check if user entered password has length less than 10
 		// or user entered password does not match with confirmedPassword
 		// then, return bad request response:
-		if (createUserRequest.getPassword().length() < 10 || !createUserRequest.getPassword().equals(createUserRequest.getConfirmedPassword())) {
+		if (createUserRequest.getPassword().length() < 10 ||
+										!createUserRequest.getPassword().equals(createUserRequest.getConfirmedPassword())) {
 			return ResponseEntity.badRequest().build();
 		}
 

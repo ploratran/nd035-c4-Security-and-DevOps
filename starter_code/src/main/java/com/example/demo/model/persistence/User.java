@@ -30,6 +30,14 @@ public class User {
 	@Column(nullable = false)
 	@JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
 	public String password;
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id", referencedColumnName = "id")
@@ -60,11 +68,5 @@ public class User {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return password;
-	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
 }
