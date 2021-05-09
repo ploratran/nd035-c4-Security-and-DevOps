@@ -60,8 +60,8 @@ public class UserController {
 		// check if user entered password has length less than 10
 		// or user entered password does not match with confirmedPassword
 		// then, return bad request response:
-		if (createUserRequest.getPassword().length() < 10 ||
-										!createUserRequest.getPassword().equals(createUserRequest.getConfirmedPassword())) {
+		if(createUserRequest.getPassword().length() < 10 ||
+				!createUserRequest.getPassword().equals(createUserRequest.getConfirmPassword())){
 			return ResponseEntity.badRequest().build();
 		}
 

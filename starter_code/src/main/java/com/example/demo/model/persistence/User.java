@@ -13,7 +13,6 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
 @Entity
 @Table(name = "user")
 public class User {
@@ -27,8 +26,8 @@ public class User {
 	@JsonProperty // tells Jackson to include this fields
 	private String username;
 
-	@Column(nullable = false)
 	@JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
+	@Column(nullable = false)
 	public String password;
 
 	public String getPassword() {
