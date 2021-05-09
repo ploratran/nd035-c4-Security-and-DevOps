@@ -26,6 +26,10 @@ public class User {
 	@Column(nullable = false, unique = true)
 	@JsonProperty // tells Jackson to include this fields
 	private String username;
+
+	@Column(nullable = false)
+	@JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
+	public String password;
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id", referencedColumnName = "id")
@@ -55,7 +59,12 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
-	
-	
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }
