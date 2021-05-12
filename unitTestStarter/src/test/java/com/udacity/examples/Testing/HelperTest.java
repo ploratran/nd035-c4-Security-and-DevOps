@@ -36,28 +36,28 @@ public class HelperTest {
     @Test
     public void testGetStringsOfLength3() {
         List<String> empNames = Arrays.asList("sareeta", "", "john","", "abc");
-        final long expected = Helper.getStringsOfLength3(empNames);
-        assertEquals(1, expected);
+        final long actual = Helper.getStringsOfLength3(empNames);
+        assertEquals(1, actual);
     }
 
     @Test
     public void testGetSquareList() {
         List<Integer> empLevel = Arrays.asList(3,3,3,5,7,2,2,5,7,5);
-        List<Integer> expected = Helper.getSquareList(empLevel);
-        assertEquals(Arrays.asList(9,25,49,4), expected);
+        List<Integer> actual = Helper.getSquareList(empLevel);
+        assertEquals(Arrays.asList(9,25,49,4), actual);
     }
 
     @Test
     public void testGetMergedList() {
         List<String> empNames = Arrays.asList("sareeta", "", "john","");
-        String expected = Helper.getMergedList(empNames);
-        assertEquals("sareeta, john", expected);
+        String actual = Helper.getMergedList(empNames);
+        assertEquals("sareeta, john", actual);
     }
 
     @Test
     public void testGetFilteredList() {
         List<String> empNames = Arrays.asList("sareeta", "", "john","");
-        List<String> expected = Helper.getFilteredList(empNames);
-        assertEquals(Arrays.asList("sareeta", "john"), expected);
+        List<String> actual = Helper.getFilteredList(empNames);
+        assertEquals(Arrays.asList("sareeta", "john"), actual);
     }
 }
