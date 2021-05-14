@@ -1,5 +1,7 @@
 package com.example.demo.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,6 +21,8 @@ import com.example.demo.model.requests.CreateUserRequest;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
+
+	private static final Logger log = LoggerFactory.getLogger(UserController.class);
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -48,6 +52,8 @@ public class UserController {
 		// use createUserRequest to get username and set new user by username:
 		User user = new User();
 		user.setUsername(createUserRequest.getUsername());
+
+		log.info("User name set with: ", createUserRequest.getUsername());
 
 		// initialize new cart
 		// save new cart into Cart Repository:
