@@ -1,7 +1,6 @@
 package com.example.demo.controllers;
 
 import org.assertj.core.util.Lists;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -9,12 +8,14 @@ import org.slf4j.LoggerFactory;
 
 import com.example.demo.model.persistence.repositories.ItemRepository;
 import com.example.demo.model.persistence.Item;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -57,9 +58,14 @@ public class ItemControllerTest {
     public void testFindAllItems() {
         ResponseEntity<List<Item>> response = itemController.getItems();
 
-        List<Item> items = response.getBody();
+        List<Item> actualItems = response.getBody();
 
-        assertNotNull(items);
+        Item item1 = createItem(1L, "Charmin Ultra Soft Toilet Paper", new BigDecimal(19.99), "18 Mega Rolls");
+
+        assertNotNull(actualItems);
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(3, actualItems.size());
     }
 
 }
