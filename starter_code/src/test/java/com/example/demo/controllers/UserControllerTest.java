@@ -28,7 +28,7 @@ import static org.mockito.Mockito.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UserControllerTest {
 
-    private static final Logger log = LoggerFactory.getLogger(UserController.class);
+    private static final Logger log = LoggerFactory.getLogger(UserControllerTest.class);
 
     private UserController userController;
 
@@ -41,7 +41,7 @@ public class UserControllerTest {
     @Before
     public void setup() {
         // inject Autowired fields UserRepository, CartRepository, BCryptPasswordEncoder into UserController:
-        log.info("setup");
+        log.info("setup called");
         userController = new UserController();
         TestUtils.injectObject(userController, "userRepository", userRepository);
         TestUtils.injectObject(userController, "cartRepository", cartRepository);
