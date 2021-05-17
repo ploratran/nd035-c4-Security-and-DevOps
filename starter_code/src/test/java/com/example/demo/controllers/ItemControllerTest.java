@@ -2,20 +2,13 @@ package com.example.demo.controllers;
 
 import org.assertj.core.util.Lists;
 import org.junit.Before;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.demo.model.persistence.repositories.ItemRepository;
 import com.example.demo.model.persistence.Item;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
@@ -24,10 +17,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.util.AssertionErrors.assertEquals;
 
-@SpringBootTest
-@ExtendWith(MockitoExtension.class)
 public class ItemControllerTest {
 
     private static final Logger log = LoggerFactory.getLogger(ItemControllerTest.class);
@@ -36,7 +26,7 @@ public class ItemControllerTest {
 
     private ItemRepository itemRepository = mock(ItemRepository.class);; // mock Item Repository
 
-    @Before
+    @BeforeEach
     public void setup() {
         log.info("setup called");
 
@@ -64,7 +54,7 @@ public class ItemControllerTest {
     }
 
     @Test
-    public void whenFindAllItems_thenAllItemsAreReturned() {
+    public void testFindAllItems() {
         ResponseEntity<List<Item>> response = itemController.getItems();
 
         List<Item> items = response.getBody();
