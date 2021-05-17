@@ -1,14 +1,18 @@
-package com.example.demo;
+package com.example.demo.controllers;
 
-import com.example.demo.controllers.UserController;
+import com.example.demo.TestUtils;
 import com.example.demo.model.persistence.repositories.CartRepository;
 import com.example.demo.model.persistence.repositories.UserRepository;
 import com.example.demo.model.requests.CreateUserRequest;
 import com.example.demo.model.persistence.User;
-import org.apache.coyote.Response;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,10 +21,14 @@ import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.Mockito.*;
 
+@SpringBootTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UserControllerTest {
+
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     private UserController userController;
 
@@ -33,6 +41,7 @@ public class UserControllerTest {
     @Before
     public void setup() {
         // inject Autowired fields UserRepository, CartRepository, BCryptPasswordEncoder into UserController:
+        log.info("setup");
         userController = new UserController();
         TestUtils.injectObject(userController, "userRepository", userRepository);
         TestUtils.injectObject(userController, "cartRepository", cartRepository);
@@ -46,20 +55,15 @@ public class UserControllerTest {
     }
 
     @Test
+    @Order(1)
     public void testCreateUser() throws Exception {
 
         // mock BCrypt to encode password with hashed password:
-        when(encoder.encode("testPassword")).thenReturn("thisIsHashed");
-        CreateUserRequest mockUser = new CreateUserRequest();
-
-        mockUser.setUsername("testUser");
-        mockUser.setPassword("testPassword");
-        mockUser.setConfirmPassword("testPassword");
+        when(encoder.encode("testPassword")).thenReturn("hashedPassword");
+        CreateUserRequest mockUser = new CreateUserRequest("testUser", "testPassword", "testPassword");
+        assertNotNull(mockUser);
 
         ResponseEntity<User> actualUser = userController.createUser(mockUser);
-
-        // test response is not null:
-        assertNotNull(mockUser);
         // test for successful request:
         assertEquals(HttpStatus.OK, actualUser.getStatusCode());
 
@@ -70,10 +74,11 @@ public class UserControllerTest {
         assertEquals(0, user.getId());
         // test username and password:
         assertEquals("testUser", user.getUsername());
-        assertEquals("thisIsHashed", user.getPassword());
+        assertEquals("hashedPassword", user.getPassword());
     }
 
     @Test
+    @Order(4)
     public void testFindUserById() {
         // create new mock user:
         User mockUser = new User(1L, "Plora", "qwertyuiop");
@@ -96,6 +101,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @Order(5)
     public void testFindByUsername() {
         // create mock user:
         User mockUser = new User(1L, "Plora", "qwertyuiop");
@@ -114,5 +120,34 @@ public class UserControllerTest {
         assertEquals(mockUser.getId(), actualUser.getId());
         assertEquals(mockUser.getUsername(), actualUser.getUsername());
         assertEquals(mockUser.getPassword(), actualUser.getPassword());
+    }
+
+    @Test
+    @Order(2)
+    public void testShortPassword() {
+        CreateUserRequest mockUser = new CreateUserRequest("testUser", "test", "test");
+
+        ResponseEntity<User> response = userController.createUser(mockUser);
+        User actualUser = response.getBody();
+
+        assertNotNull(response);
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertNull(actualUser);
+    }
+
+    @Test
+    @Order(3)
+    public void testMismatchedPassword() {
+        // mock BCrypt to encode password with hashed password:
+        when(encoder.encode("testPassword")).thenReturn("hashedPassword");
+        CreateUserRequest mockUser = new CreateUserRequest("testUser", "testPassword", "testtPassword");
+
+        ResponseEntity<User> response = userController.createUser(mockUser);
+        User actualUser = response.getBody();
+
+        assertNotNull(response);
+        // test for bad request:
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertNull(actualUser);
     }
 }
