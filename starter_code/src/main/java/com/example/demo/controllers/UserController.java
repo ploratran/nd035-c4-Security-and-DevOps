@@ -61,19 +61,22 @@ public class UserController {
 		cartRepository.save(cart);
 		// set new cart to user:
 		user.setCart(cart);
+		log.info("User cart set with: ", user.getCart());
 
 		// validation of user input request
-		// check if user entered password has length less than 10
+		// check if user entered password has length less than 8
 		// or user entered password does not match with confirmedPassword
 		// then, return bad request response:
-		if(createUserRequest.getPassword().length() < 10 ||
+		if(createUserRequest.getPassword().length() < 8 ||
 				!createUserRequest.getPassword().equals(createUserRequest.getConfirmPassword())){
+			log.info("Your password is either less than 8 or passwords mismatch");
 			return ResponseEntity.badRequest().build();
 		}
 
 		// use BCrypt password hash algorithm to encode user entered password
 		// then, set user's password with the encoded password:
 		user.setPassword(bCryptPasswordEncoder.encode(createUserRequest.getPassword()));
+		log.info("Password is set with: ", createUserRequest.getPassword());
 
 		userRepository.save(user);
 		return ResponseEntity.ok(user);

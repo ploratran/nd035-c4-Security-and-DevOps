@@ -30,19 +30,21 @@ public class User {
 	@Column(nullable = false)
 	public String password;
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id", referencedColumnName = "id")
 	@JsonIgnore // tells Jackson to ignore this fields
     private Cart cart;
-	
+
+	// no-arg constructor:
+	public User() {}
+
+	// all-args constructor:
+	public User(long id, String username, String password) {
+		this.id = id;
+		this.username = username;
+		this.password = password;
+	}
+
 	public Cart getCart() {
 		return cart;
 	}
@@ -57,6 +59,14 @@ public class User {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getUsername() {
