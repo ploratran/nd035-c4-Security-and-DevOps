@@ -1,7 +1,10 @@
 package com.example.demo.controllers;
 
 import org.assertj.core.util.Lists;
+import org.junit.Before;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import java.math.BigDecimal;
 import java.util.*;
 
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -28,7 +32,7 @@ public class ItemControllerTest {
     private ItemRepository itemRepository = mock(ItemRepository.class);; // mock Item Repository
 
     @BeforeEach
-    public void setup() {
+    public void initData() {
         log.info("setup called");
 
         itemController = new ItemController(itemRepository);
@@ -40,6 +44,7 @@ public class ItemControllerTest {
 
         // mock Item Repository to get all items:
         when(itemRepository.findAll()).thenReturn(Lists.list(item1, item2, item3));
+        when(itemRepository.findById(1L)).thenReturn(Optional.of(item1));
     }
 
     // helper function to create mock data of each item:
@@ -60,12 +65,33 @@ public class ItemControllerTest {
 
         List<Item> actualItems = response.getBody();
 
-        Item item1 = createItem(1L, "Charmin Ultra Soft Toilet Paper", new BigDecimal(19.99), "18 Mega Rolls");
-
         assertNotNull(actualItems);
         assertNotNull(response);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(3, actualItems.size());
+    }
+
+    @Test
+    public void testGetItemByID() {
+        Item mockItem = createItem(1L, "Charmin Ultra Soft Toilet Paper", new BigDecimal(19.99), "18 Mega Rolls");
+        Item mockItem2 = createItem(2L, "Charmin Ultra Soft Toilet Paper ", new BigDecimal(29.99), "30 Mega Rolls");
+
+        ResponseEntity<Item> response = itemController.getItemById(1L);
+        Item actualItem = response.getBody();
+
+        // test for response:
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(actualItem);
+
+        // test for match item:
+        assertEquals(mockItem, actualItem);
+        assertEquals(mockItem.getId(), actualItem.getId());
+        assertEquals(mockItem.getId().longValue(), 1L);
+        assertEquals(mockItem.getPrice().doubleValue(), 19.99);
+
+        // test for wrong item:
+        assertNotEquals(mockItem2, actualItem);
     }
 
 }
