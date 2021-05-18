@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import org.apache.coyote.Response;
 import org.assertj.core.util.Lists;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeAll;
@@ -17,9 +18,7 @@ import org.springframework.http.ResponseEntity;
 import java.math.BigDecimal;
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -39,12 +38,13 @@ public class ItemControllerTest {
 
         // set mock data of items:
         Item item1 = createItem(1L, "Charmin Ultra Soft Toilet Paper", new BigDecimal(19.99), "18 Mega Rolls");
-        Item item2 = createItem(2L, "Charmin Ultra Soft Toilet Paper ", new BigDecimal(29.99), "30 Mega Rolls");
+        Item item2 = createItem(2L, "Charmin Ultra Soft Toilet Paper", new BigDecimal(29.99), "30 Mega Rolls");
         Item item3 = createItem(3L, "Bounty Full Sheet Paper Towels", new BigDecimal(9.99), "6 Double Rolls");
 
         // mock Item Repository to get all items:
         when(itemRepository.findAll()).thenReturn(Lists.list(item1, item2, item3));
         when(itemRepository.findById(1L)).thenReturn(Optional.of(item1));
+        when(itemRepository.findByName("Charmin Ultra Soft Toilet Paper")).thenReturn(Lists.list(item1, item2));
     }
 
     // helper function to create mock data of each item:
@@ -60,6 +60,7 @@ public class ItemControllerTest {
     }
 
     @Test
+    @Order(1)
     public void testFindAllItems() {
         ResponseEntity<List<Item>> response = itemController.getItems();
 
@@ -72,6 +73,7 @@ public class ItemControllerTest {
     }
 
     @Test
+    @Order(2)
     public void testGetItemByID() {
         Item mockItem = createItem(1L, "Charmin Ultra Soft Toilet Paper", new BigDecimal(19.99), "18 Mega Rolls");
         Item mockItem2 = createItem(2L, "Charmin Ultra Soft Toilet Paper ", new BigDecimal(29.99), "30 Mega Rolls");
@@ -94,4 +96,25 @@ public class ItemControllerTest {
         assertNotEquals(mockItem2, actualItem);
     }
 
+    @Test
+    @Order(3)
+    public void testGetItemsByName() {
+        ResponseEntity<List<Item>> response = itemController.getItemsByName("Charmin Ultra Soft Toilet Paper");
+        List<Item> actualItems = response.getBody();
+
+        assertNotNull(response);
+        assertNotNull(actualItems);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+
+        assertEquals(2, actualItems.size());
+    }
+
+    @Test
+    @Order(4)
+    public void testGetItemsByNameNotFound() {
+        // edge case for getItemsByName() where no name is given to the REST api:
+        ResponseEntity<List<Item>> response = itemController.getItemsByName("");
+
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+    }
 }
