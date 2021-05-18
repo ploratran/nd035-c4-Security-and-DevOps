@@ -1,9 +1,6 @@
 package com.example.demo.controllers;
 
-import org.apache.coyote.Response;
 import org.assertj.core.util.Lists;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -31,7 +28,7 @@ public class ItemControllerTest {
     private ItemRepository itemRepository = mock(ItemRepository.class);; // mock Item Repository
 
     @BeforeEach
-    public void initData() {
+    public void setup() {
         log.info("setup called");
 
         itemController = new ItemController(itemRepository);
@@ -48,14 +45,8 @@ public class ItemControllerTest {
     }
 
     // helper function to create mock data of each item:
-    private Item createItem(Long id, String name, BigDecimal price, String description) {
-        Item item = new Item();
-
-        item.setId(id);
-        item.setName(name);
-        item.setPrice(price);
-        item.setDescription(description);
-
+    private static Item createItem(Long id, String name, BigDecimal price, String description) {
+        Item item = new Item(id, name, price, description);
         return item;
     }
 

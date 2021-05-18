@@ -49,7 +49,7 @@ public class UserControllerTest {
     }
 
     // helper class to create new user:
-    private User newUser() {
+    private static User newUser() {
         User user = new User(1L, "Plora", "qwertyuiop");
         return user;
     }
