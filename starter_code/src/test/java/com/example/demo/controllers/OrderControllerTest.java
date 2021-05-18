@@ -23,6 +23,7 @@ import org.springframework.http.ResponseEntity;
 import java.math.BigDecimal;
 import java.util.*;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
@@ -44,6 +45,7 @@ public class OrderControllerTest {
 
         orderController = new OrderController(orderRepository, userRepository);
 
+        // mock repositories:
         when(userRepository.findByUsername("Plora")).thenReturn(getUser());
     }
 
@@ -64,6 +66,15 @@ public class OrderControllerTest {
         assertEquals(new BigDecimal(19.99), actualOrder.getTotal());
     }
 
+    @Test
+    @Order(2)
+    public void testInvalidSubmit() {
+        // test edge case with no username given:
+        ResponseEntity<UserOrder> response = orderController.submit("");
+
+        assertNull(response.getBody());
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
 
     // helper functions:
     private static User getUser() {
