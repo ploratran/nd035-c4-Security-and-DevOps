@@ -47,6 +47,7 @@ public class OrderControllerTest {
 
         // mock repositories:
         when(userRepository.findByUsername("Plora")).thenReturn(getUser());
+        when(orderRepository.findByUser(getUser())).thenReturn((getUserOrders()));
     }
 
     @Test
@@ -72,6 +73,27 @@ public class OrderControllerTest {
         // test edge case with no username given:
         ResponseEntity<UserOrder> response = orderController.submit("");
 
+        assertNull(response.getBody());
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    @Order(3)
+    public void testGetOrdersForUser() {
+        ResponseEntity<List<UserOrder>> response = orderController.getOrdersForUser("Plora");
+        List<UserOrder> orders = response.getBody();
+
+        assertNotNull(response);
+        assertNotNull(orders);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+
+        assertEquals(orders.size(), 1);
+    }
+
+    @Test
+    @Order(4)
+    public void testGetOrdersWithInvalidUser() {
+        ResponseEntity<List<UserOrder>> response = orderController.getOrdersForUser("");
         assertNull(response.getBody());
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
