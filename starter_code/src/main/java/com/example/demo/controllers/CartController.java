@@ -31,7 +31,13 @@ public class CartController {
 	
 	@Autowired
 	private ItemRepository itemRepository;
-	
+
+	public CartController(UserRepository userRepository, CartRepository cartRepository, ItemRepository itemRepository) {
+		this.userRepository = userRepository;
+		this.cartRepository = cartRepository;
+		this.itemRepository = itemRepository;
+	}
+
 	@PostMapping("/addToCart")
 	public ResponseEntity<Cart> addTocart(@RequestBody ModifyCartRequest request) {
 		User user = userRepository.findByUsername(request.getUsername());
