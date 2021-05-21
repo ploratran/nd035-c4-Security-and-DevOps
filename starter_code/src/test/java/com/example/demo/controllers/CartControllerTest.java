@@ -48,7 +48,10 @@ public class CartControllerTest {
     @Test
     @Order(1)
     public void testAddToCart() {
-        // add new ModifyCartRequest item to cart:
+        // add new ModifyCartRequest item to cart
+        // Item(id, name, price, description)
+        // Cart(id, List<Item> items, User user)
+        // ModifyCartRequest(itemId, username, quantity):
         ResponseEntity<Cart> response = cartController.addToCart(new ModifyCartRequest(1L, "Plora", 1));
         Cart actualCart = response.getBody();
 
@@ -57,9 +60,10 @@ public class CartControllerTest {
 
         // test properties of Cart:
         assertEquals("Plora", actualCart.getUser().getUsername());
-        assertEquals(actualCart.getItems().size(), 2); // cart should have 2 items after adding new item to cart
+        assertEquals(2, actualCart.getItems().size()); // cart should have 2 items after adding new item to cart
         assertEquals(2, actualCart.getItems().stream().count()); // should have 2 items in cart after adding
         assertEquals(1, actualCart.getUser().getId()); // cart's user id should be 1 due to same user's cart
+        assertEquals(1, actualCart.getItems().get(0).getId()); // first item in List<Item> has id of 1
     }
 
     @Test
