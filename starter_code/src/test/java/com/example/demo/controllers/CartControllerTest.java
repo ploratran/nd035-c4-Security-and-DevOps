@@ -62,6 +62,15 @@ public class CartControllerTest {
         assertEquals(1, actualCart.getUser().getId()); // cart's user id should be 1 due to same user's cart
     }
 
+    @Test
+    @Order(2)
+    public void testAddToCartWithInvalidItem() {
+        ResponseEntity<Cart> response = cartController.addToCart(new ModifyCartRequest(1L, "", 1));
+
+        assertNull(response.getBody());
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
     /** helper functions: */
     private static User getUser() {
         User user = new User(1L, "Plora", "testPassword");
