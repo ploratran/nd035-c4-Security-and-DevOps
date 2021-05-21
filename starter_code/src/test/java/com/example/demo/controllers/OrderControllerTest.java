@@ -4,6 +4,11 @@ import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,6 +18,7 @@ import com.example.demo.model.persistence.User;
 import com.example.demo.model.persistence.Cart;
 import com.example.demo.model.persistence.Item;
 import com.example.demo.model.persistence.UserOrder;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -22,9 +28,11 @@ import java.util.*;
 import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@SpringBootTest
 public class OrderControllerTest {
 
     private static final Logger log = LoggerFactory.getLogger(ItemControllerTest.class);
@@ -39,11 +47,16 @@ public class OrderControllerTest {
     public void setup() {
         log.info("setup called");
 
+        MockitoAnnotations.initMocks(this);
+
         orderController = new OrderController(orderRepository, userRepository);
 
         // mock repositories:
         when(userRepository.findByUsername("Plora")).thenReturn(getUser());
-        when(orderRepository.findByUser(getUser())).thenReturn((getUserOrders()));
+
+        // have to use any() matcher here because the returned value is responded beforehand:
+        // Reference Argument Matcher: https://www.baeldung.com/mockito-argument-matchers
+        when(orderRepository.findByUser(any())).thenReturn((getUserOrders()));
     }
 
     @Test
@@ -84,6 +97,12 @@ public class OrderControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
 
         assertEquals(orders.size(), 1);
+
+        // test UserOrder properties such as user, items, total:
+        UserOrder userOrder = orders.get(0);
+        assertEquals("Plora", userOrder.getUser().getUsername());
+        assertEquals(new BigDecimal(19.99), userOrder.getTotal());
+        assertEquals(1, userOrder.getItems().size());
     }
 
     @Test
