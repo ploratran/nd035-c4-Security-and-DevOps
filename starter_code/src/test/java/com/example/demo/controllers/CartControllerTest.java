@@ -55,6 +55,7 @@ public class CartControllerTest {
         ResponseEntity<Cart> response = cartController.addToCart(new ModifyCartRequest(1L, "Plora", 1));
         Cart actualCart = response.getBody();
 
+        assertNotNull(response);
         assertNotNull(actualCart);
         assertEquals(HttpStatus.OK, response.getStatusCode());
 
@@ -69,8 +70,9 @@ public class CartControllerTest {
     @Test
     @Order(2)
     public void testAddToCartWithInvalidInput() {
-        ResponseEntity<Cart> response = cartController.addToCart(new ModifyCartRequest(1L, "", 1));
+        ResponseEntity<Cart> response = cartController.addToCart(new ModifyCartRequest(100L, "", 1));
 
+        assertNull(response.getBody());
         assertNull(response.getBody());
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
@@ -81,6 +83,7 @@ public class CartControllerTest {
         ResponseEntity<Cart> response = cartController.removeFromCart(new ModifyCartRequest(1L, "Plora", 1));
         Cart actualCart = response.getBody();
 
+        assertNotNull(response);
         assertNotNull(response.getBody());
         assertEquals(HttpStatus.OK, response.getStatusCode());
 
@@ -94,7 +97,7 @@ public class CartControllerTest {
     @Test
     @Order(4)
     public void testRemoveCartWithInvalidInput() {
-        ResponseEntity<Cart> response = cartController.removeFromCart(new ModifyCartRequest(1L, "", 1));
+        ResponseEntity<Cart> response = cartController.removeFromCart(new ModifyCartRequest(0L, "", 1));
 
         assertNull(response.getBody());
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
