@@ -75,6 +75,15 @@ public class CartControllerTest {
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
+    @Test
+    @Order(3)
+    public void testRemoveFromCart() {
+        ResponseEntity<Cart> response = cartController.removeFromCart(new ModifyCartRequest(1L, "Plora", 1));
+
+        assertNotNull(response.getBody());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
     /** helper functions: */
     private static User getUser() {
         User user = new User(1L, "Plora", "testPassword");
