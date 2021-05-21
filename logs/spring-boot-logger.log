@@ -1,0 +1,27 @@
+2021-05-21 13:13:37,329 INFO org.springframework.boot.StartupInfoLogger [main] Starting ECommerceApplication on ploras-mbp.lan with PID 16131 (/Users/ploratran/Desktop/nd035-c4-Security-and-DevOps/starter_code/target/classes started by ploratran in /Users/ploratran/Desktop/nd035-c4-Security-and-DevOps)
+2021-05-21 13:13:37,363 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2021-05-21 13:13:38,085 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-05-21 13:13:38,150 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 51ms. Found 4 repository interfaces.
+2021-05-21 13:13:38,597 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$7eeb0fbf] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-05-21 13:13:38,832 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2021-05-21 13:13:38,849 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2021-05-21 13:13:38,859 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2021-05-21 13:13:38,859 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.19]
+2021-05-21 13:13:38,983 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2021-05-21 13:13:38,984 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1548 ms
+2021-05-21 13:13:39,166 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2021-05-21 13:13:39,314 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2021-05-21 13:13:39,357 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2021-05-21 13:13:39,421 INFO org.hibernate.Version [main] HHH000412: Hibernate Core {5.3.10.Final}
+2021-05-21 13:13:39,424 INFO org.hibernate.cfg.Environment [main] HHH000206: hibernate.properties not found
+2021-05-21 13:13:39,563 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2021-05-21 13:13:39,675 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2021-05-21 13:13:40,331 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-05-21 13:13:40,813 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-05-21 13:13:40,871 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3361d286, org.springframework.security.web.context.SecurityContextPersistenceFilter@c86c486, org.springframework.security.web.header.HeaderWriterFilter@296bfddb, org.springframework.web.filter.CorsFilter@6ee186f3, org.springframework.security.web.authentication.logout.LogoutFilter@320770d7, com.example.demo.security.JWTAuthenticationFilter@49fb693d, com.example.demo.security.JWTAuthenticationVerificationFilter@38197e82, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3ea6faf0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@c96c497, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5516ee5, org.springframework.security.web.session.SessionManagementFilter@32f14274, org.springframework.security.web.access.ExceptionTranslationFilter@44e4cf8a, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2e40ea48]
+2021-05-21 13:13:40,985 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2021-05-21 13:13:41,101 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2021-05-21 13:13:41,138 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2021-05-21 13:13:41,140 INFO org.springframework.boot.StartupInfoLogger [main] Started ECommerceApplication in 4.221 seconds (JVM running for 4.643)
