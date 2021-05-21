@@ -13,6 +13,14 @@ public class ModifyCartRequest {
 	@JsonProperty // tells Jackson to include this fields
 	private int quantity;
 
+	public ModifyCartRequest() {}
+
+	public ModifyCartRequest(long itemId, String username, int quantity) {
+		this.username = username;
+		this.itemId = itemId;
+		this.quantity = quantity;
+	}
+
 	public String getUsername() {
 		return username;
 	}
