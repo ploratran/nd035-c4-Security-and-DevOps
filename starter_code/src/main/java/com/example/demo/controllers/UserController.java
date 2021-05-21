@@ -42,6 +42,8 @@ public class UserController {
 	@GetMapping("/{username}")
 	public ResponseEntity<User> findByUserName(@PathVariable String username) {
 		User user = userRepository.findByUsername(username);
+		log.info("Username is set with: ", username);
+
 		return user == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(user);
 	}
 
@@ -52,8 +54,7 @@ public class UserController {
 		// use createUserRequest to get username and set new user by username:
 		User user = new User();
 		user.setUsername(createUserRequest.getUsername());
-
-		log.info("User name set with: ", createUserRequest.getUsername());
+		log.info("Username is set with: ", createUserRequest.getUsername());
 
 		// initialize new cart
 		// save new cart into Cart Repository:
@@ -69,7 +70,7 @@ public class UserController {
 		// then, return bad request response:
 		if(createUserRequest.getPassword().length() < 8 ||
 				!createUserRequest.getPassword().equals(createUserRequest.getConfirmPassword())){
-			log.info("Your password is either less than 8 or passwords mismatch");
+			log.warn("Your password is either less than 8 or passwords mismatch");
 			return ResponseEntity.badRequest().build();
 		}
 
