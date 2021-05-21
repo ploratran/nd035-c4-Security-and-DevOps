@@ -42,12 +42,13 @@ public class CartControllerTest {
         cartController = new CartController(userRepository, cartRepository, itemRepository);
 
         when(userRepository.findByUsername("Plora")).thenReturn(getUser());
-        when(itemRepository.findById(1L)).thenReturn(Optional.of(getItem()));
+        when(itemRepository.findById(1L)).thenReturn(getItem());
     }
 
     @Test
     @Order(1)
     public void testAddToCart() {
+        // add new ModifyCartRequest item to cart:
         ResponseEntity<Cart> response = cartController.addToCart(new ModifyCartRequest(1L, "Plora", 1));
         Cart actualCart = response.getBody();
 
@@ -56,7 +57,9 @@ public class CartControllerTest {
 
         // test properties of Cart:
         assertEquals("Plora", actualCart.getUser().getUsername());
-        assertEquals(new BigDecimal(1L), actualCart.getId());
+        assertEquals(actualCart.getItems().size(), 2); // cart should have 2 items after adding new item to cart
+        assertEquals(2, actualCart.getItems().stream().count()); // should have 2 items in cart after adding
+        assertEquals(1, actualCart.getUser().getId()); // cart's user id should be 1 due to same user's cart
     }
 
     /** helper functions: */
@@ -69,14 +72,14 @@ public class CartControllerTest {
 
     private static Cart getCart(User user) {
         Cart cart = new Cart();
-        cart.addItem(getItem());
         cart.setUser(user);
-
+        cart.addItem(getItem().orElse(null));
         return cart;
     }
 
-    private static Item getItem() {
+    private static Optional<Item> getItem() {
         Item item = new Item(1L, "Charmin Ultra Soft Toilet Paper", new BigDecimal(19.99), "18 Mega Rolls");
-        return item;
+
+        return Optional.of(item);
     }
 }
