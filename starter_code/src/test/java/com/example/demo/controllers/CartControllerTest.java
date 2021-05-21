@@ -68,7 +68,7 @@ public class CartControllerTest {
 
     @Test
     @Order(2)
-    public void testAddToCartWithInvalidItem() {
+    public void testAddToCartWithInvalidInput() {
         ResponseEntity<Cart> response = cartController.addToCart(new ModifyCartRequest(1L, "", 1));
 
         assertNull(response.getBody());
@@ -89,6 +89,15 @@ public class CartControllerTest {
         assertEquals(0, actualCart.getItems().stream().count()); // same with using size()
         assertEquals(0, actualCart.getTotal().intValue()); // cart's total should be 0 when there's no item
         assertEquals("Plora", actualCart.getUser().getUsername());
+    }
+
+    @Test
+    @Order(4)
+    public void testRemoveCartWithInvalidInput() {
+        ResponseEntity<Cart> response = cartController.removeFromCart(new ModifyCartRequest(1L, "", 1));
+
+        assertNull(response.getBody());
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
     /** helper functions: */
