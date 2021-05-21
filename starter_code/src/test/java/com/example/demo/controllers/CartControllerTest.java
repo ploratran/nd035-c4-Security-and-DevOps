@@ -79,9 +79,16 @@ public class CartControllerTest {
     @Order(3)
     public void testRemoveFromCart() {
         ResponseEntity<Cart> response = cartController.removeFromCart(new ModifyCartRequest(1L, "Plora", 1));
+        Cart actualCart = response.getBody();
 
         assertNotNull(response.getBody());
         assertEquals(HttpStatus.OK, response.getStatusCode());
+
+        // test for cart's properties:
+        assertEquals(0, actualCart.getItems().size()); // cart should be 0 after remove 1 item
+        assertEquals(0, actualCart.getItems().stream().count()); // same with using size()
+        assertEquals(0, actualCart.getTotal().intValue()); // cart's total should be 0 when there's no item
+        assertEquals("Plora", actualCart.getUser().getUsername());
     }
 
     /** helper functions: */
