@@ -45,22 +45,18 @@ public class CartController {
 	@PostMapping("/addToCart")
 	public ResponseEntity<Cart> addToCart(@RequestBody ModifyCartRequest request) {
 		User user = userRepository.findByUsername(request.getUsername());
-		log.info("Username is set with: ", request.getUsername());
 
 		if(user == null) {
-			log.warn("No user found!");
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 
 		Optional<Item> item = itemRepository.findById(request.getItemId());
 		if(!item.isPresent()) {
-			log.warn("No item found!");
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		Cart cart = user.getCart();
 		IntStream.range(0, request.getQuantity())
 			.forEach(i -> cart.addItem(item.get()));
-		log.info("Cart has: ", cart);
 
 		cartRepository.save(cart);
 		return ResponseEntity.ok(cart);
@@ -69,23 +65,19 @@ public class CartController {
 	@PostMapping("/removeFromCart")
 	public ResponseEntity<Cart> removeFromCart(@RequestBody ModifyCartRequest request) {
 		User user = userRepository.findByUsername(request.getUsername());
-		log.info("Username is set with: ", request.getUsername());
 
 		if(user == null) {
-			log.warn("No user found!");
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 
 		Optional<Item> item = itemRepository.findById(request.getItemId());
 		if(!item.isPresent()) {
-			log.warn("No item found!");
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 
 		Cart cart = user.getCart();
 		IntStream.range(0, request.getQuantity())
 			.forEach(i -> cart.removeItem(item.get()));
-		log.info("Cart is set with", cart);
 
 		cartRepository.save(cart);
 		return ResponseEntity.ok(cart);

@@ -54,7 +54,6 @@ public class UserController {
 		// use createUserRequest to get username and set new user by username:
 		User user = new User();
 		user.setUsername(createUserRequest.getUsername());
-		log.info("Username is set with: ", createUserRequest.getUsername());
 
 		// initialize new cart
 		// save new cart into Cart Repository:
@@ -62,7 +61,6 @@ public class UserController {
 		cartRepository.save(cart);
 		// set new cart to user:
 		user.setCart(cart);
-		log.info("User cart set with: ", user.getCart());
 
 		// validation of user input request
 		// check if user entered password has length less than 8
@@ -70,16 +68,16 @@ public class UserController {
 		// then, return bad request response:
 		if(createUserRequest.getPassword().length() < 8 ||
 				!createUserRequest.getPassword().equals(createUserRequest.getConfirmPassword())){
-			log.warn("Your password is either less than 8 or passwords mismatch");
+			log.error("Failed to create {}. Your password is either less than 8 or passwords mismatch", createUserRequest.getUsername());
 			return ResponseEntity.badRequest().build();
 		}
 
 		// use BCrypt password hash algorithm to encode user entered password
 		// then, set user's password with the encoded password:
 		user.setPassword(bCryptPasswordEncoder.encode(createUserRequest.getPassword()));
-		log.info("Password is set with: ", createUserRequest.getPassword());
-
 		userRepository.save(user);
+
+		log.info("Successfully created new {}", createUserRequest.getUsername());
 		return ResponseEntity.ok(user);
 	}
 	
