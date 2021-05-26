@@ -1,1 +1,6 @@
-/Users/ploratran/Desktop/nd035-c4-Security-and-DevOps/starter_code/src/test/java/com/example/demo/SareetaApplicationTests.java
+/Users/ploratran/Desktop/nd035-c4-Security-and-DevOps/starter_code/src/test/java/com/example/demo/controllers/CartControllerTest.java
+/Users/ploratran/Desktop/nd035-c4-Security-and-DevOps/starter_code/src/test/java/com/example/demo/TestUtils.java
+/Users/ploratran/Desktop/nd035-c4-Security-and-DevOps/starter_code/src/test/java/com/example/demo/ECommerceAppTests.java
+/Users/ploratran/Desktop/nd035-c4-Security-and-DevOps/starter_code/src/test/java/com/example/demo/controllers/ItemControllerTest.java
+/Users/ploratran/Desktop/nd035-c4-Security-and-DevOps/starter_code/src/test/java/com/example/demo/controllers/UserControllerTest.java
+/Users/ploratran/Desktop/nd035-c4-Security-and-DevOps/starter_code/src/test/java/com/example/demo/controllers/OrderControllerTest.java
