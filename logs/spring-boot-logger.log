@@ -2277,3 +2277,40 @@ java.lang.StackOverflowError: null
 2021-05-25 16:20:45,914 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [Thread-3] Closing JPA EntityManagerFactory for persistence unit 'default'
 2021-05-25 16:20:45,916 INFO com.zaxxer.hikari.HikariDataSource [Thread-3] HikariPool-1 - Shutdown initiated...
 2021-05-25 16:20:45,919 INFO com.zaxxer.hikari.HikariDataSource [Thread-3] HikariPool-1 - Shutdown completed.
+2021-05-25 18:45:20,677 INFO org.springframework.boot.StartupInfoLogger [main] Starting ECommerceApplication on ploras-mbp.lan with PID 91283 (/Users/ploratran/Desktop/nd035-c4-Security-and-DevOps/starter_code/target/classes started by ploratran in /Users/ploratran/Desktop/nd035-c4-Security-and-DevOps)
+2021-05-25 18:45:20,681 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2021-05-25 18:45:21,227 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-05-25 18:45:21,296 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 58ms. Found 4 repository interfaces.
+2021-05-25 18:45:21,732 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$77ed1540] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-05-25 18:45:21,988 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2021-05-25 18:45:22,004 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2021-05-25 18:45:22,014 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2021-05-25 18:45:22,015 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.19]
+2021-05-25 18:45:22,136 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2021-05-25 18:45:22,137 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1396 ms
+2021-05-25 18:45:22,293 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2021-05-25 18:45:22,458 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2021-05-25 18:45:22,513 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2021-05-25 18:45:22,589 INFO org.hibernate.Version [main] HHH000412: Hibernate Core {5.3.10.Final}
+2021-05-25 18:45:22,591 INFO org.hibernate.cfg.Environment [main] HHH000206: hibernate.properties not found
+2021-05-25 18:45:22,735 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2021-05-25 18:45:22,892 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2021-05-25 18:45:23,660 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-05-25 18:45:24,301 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-05-25 18:45:24,373 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@176e839e, org.springframework.security.web.context.SecurityContextPersistenceFilter@2e7e84f8, org.springframework.security.web.header.HeaderWriterFilter@52bc6fcf, org.springframework.web.filter.CorsFilter@4ac0d49, org.springframework.security.web.authentication.logout.LogoutFilter@71458178, com.example.demo.security.JWTAuthenticationFilter@7c6ab057, com.example.demo.security.JWTAuthenticationVerificationFilter@7ce4498f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@320770d7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@67689c81, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1f7557fe, org.springframework.security.web.session.SessionManagementFilter@24668b5b, org.springframework.security.web.access.ExceptionTranslationFilter@7bc8da3f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@426913c4]
+2021-05-25 18:45:24,490 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2021-05-25 18:45:24,697 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2021-05-25 18:45:24,758 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2021-05-25 18:45:24,764 INFO org.springframework.boot.StartupInfoLogger [main] Started ECommerceApplication in 4.624 seconds (JVM running for 5.296)
+2021-05-25 18:45:41,877 INFO org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-2] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-05-25 18:45:41,878 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-2] Initializing Servlet 'dispatcherServlet'
+2021-05-25 18:45:41,886 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-2] Completed initialization in 8 ms
+2021-05-25 18:45:42,030 ERROR com.example.demo.controllers.UserController [http-nio-8080-exec-2] Failed to create Plora. Your password is either less than 8 or passwords mismatch
+2021-05-25 18:46:14,345 ERROR com.example.demo.controllers.UserController [http-nio-8080-exec-4] Failed to create Plora. Your password is either less than 8 or passwords mismatch
+2021-05-25 18:46:18,366 INFO com.example.demo.controllers.UserController [http-nio-8080-exec-6] Successfully created new Plora
+2021-05-25 18:49:19,525 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [Thread-3] Shutting down ExecutorService 'applicationTaskExecutor'
+2021-05-25 18:49:19,530 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [Thread-3] Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-05-25 18:49:19,540 INFO com.zaxxer.hikari.HikariDataSource [Thread-3] HikariPool-1 - Shutdown initiated...
+2021-05-25 18:49:19,547 INFO com.zaxxer.hikari.HikariDataSource [Thread-3] HikariPool-1 - Shutdown completed.

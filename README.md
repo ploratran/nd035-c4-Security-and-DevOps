@@ -78,3 +78,15 @@ and that should, if those are valid credentials, return a 200 OK with an Authori
 
 ## Testing
 You must implement unit tests demonstrating at least 80% code coverage.
+
+## Extra Credit
+
+**1. Create a docker image for the project 
+and deploy it to a docker container. 
+Submit a screenshot of the result.**
+
+[Reference Tutorial](https://www.youtube.com/watch?v=Hz0r0qd0x2U)
+
+**2. Setup Jenkins in docker and submit a screenshot of the result**
+
+Follow this [Tutorial](Setup Jenkins in docker and submit a screenshot of the result)
